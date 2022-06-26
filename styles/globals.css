@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Changa&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Changa', sans-serif;
+  }
+  .clip-external {
+    clip-path: polygon(0 0, 80% 0, 100% 11%, 100% 80%, 100% 93%, 54% 93%, 49% 100%, 0 100%);
+  }
+  .clip-internal {
+    clip-path: polygon(0 1%, 79% 1%, 98% 11%, 98% 80%, 98% 92%, 54% 92%, 48% 99%, 0 99%);
+  }
+}

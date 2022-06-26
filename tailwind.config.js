@@ -15,8 +15,8 @@ module.exports = {
       '2xl': '1496px',
     },
     fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
-      serif: ['Merriweather', 'serif'],
+      sans: ['Changa', 'sans-serif'],
+      serif: ['Changa', 'serif'],
     },
     extend: {
       spacing: {
@@ -28,19 +28,19 @@ module.exports = {
       },
       backgroundImage: {
         'main-background': "url('../src/assets/images/background.png')",
-        'gray-to-sky': "linear-gradient(to bottom, #38bdf8 50% , #9ca3af 50%);",
-        'yellow-to-yellow': "linear-gradient(to bottom, #facc15 50% , #a16207 50%);",
-        'red-to-sky': "linear-gradient(to bottom, #0369a1 50% , #f87171 50%);",
-
+        'gray-to-sky': "linear-gradient(to bottom, #38bdf8 50% , #9ca3af 50%)",
+        'yellow-to-yellow': "linear-gradient(to bottom, #facc15 50% , #a16207 50%)",
+        'red-to-sky': "linear-gradient(to bottom, #0369a1 50% , #f87171 50%)",
+        'green-to-gray': "linear-gradient(to bottom, #22c55e 60% , #737373 40%)",
       },
       animation: {
-        'bounce-once': 'single-bounce 0.2s 1'
+        'bounce-once': 'single-bounce 0.2s 1',
       },
       keyframes: {
         'single-bounce': {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-2%)' },
-        }
+        },
       },
     },
   },

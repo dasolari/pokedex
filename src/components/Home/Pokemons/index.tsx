@@ -27,15 +27,15 @@ const Pokemons: NextPage = () => {
 
   useEffect(() => {
     if (data) {
-      handleAddPokemons(data.results, offset);
+      handleAddPokemons(data.results);
     }
   }, [data]);
 
   return (
     <div className="w-full flex flex-col mt-8">
-      <div className="w-full flex justify-between">
+      <div className="w-full flex space-x-36">
         <button
-          className="w-1/3 p-3 bg-cyan-600 rounded-md text-white text-xl hover:bg-cyan-700 transition-all"
+          className="w-full p-3 bg-sky-500 rounded-md text-white text-xl hover:bg-cyan-700 transition-all"
           onClick={loadRandomPokemon}
         >
           <span className="flex justify-center align-middle">
@@ -43,7 +43,7 @@ const Pokemons: NextPage = () => {
             <p className="-mt-px p-0">¡Sorpréndeme!</p>
           </span>
         </button>
-        <div className="w-1/3 bg-gray-900 text-white rounded-md pl-12 relative">
+        <div className="w-full bg-gray-900 text-white rounded-md pl-12 relative">
           <TbPokeball className="absolute left-4 top-1/2 transform -translate-y-1/2" size={25} />
           <select className="w-full h-full bg-inherit rounded-md" placeholder="Ordenar por...">
             <option>Número Inferior</option>

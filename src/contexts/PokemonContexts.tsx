@@ -10,7 +10,7 @@ interface IContext {
   pokemons: Pokemon[];
   offset: number;
   changeOffset: (value: number) => void;
-  handleAddPokemons: (pokemons: Pokemon[], newOffset: number) => void;
+  handleAddPokemons: (pokemons: Pokemon[]) => void;
   handleClearPokemons: () => void;
 }
 
@@ -27,7 +27,10 @@ const PokemonsContextProvider: NextPage<Props> = (props: Props) => {
   const [state, setState] = useState<Pokemon[]>([]);
   const [offset, setOffset] = useState<number>(0);
 
-  const handleAddPokemons = (pokemons: Pokemon[], newOffset: number) => {
+  const handleAddPokemons = (pokemons: Pokemon[]) => {
+    const lastPokemon = pokemons.slice(-1)[0];
+    const foundInArray = state.find((pokemon) => pokemon.id === lastPokemon.id);
+    if (foundInArray) return;
     setState([...state, ...pokemons]);
   };
 
