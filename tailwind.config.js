@@ -28,6 +28,10 @@ module.exports = {
       },
       backgroundImage: {
         'main-background': "url('../src/assets/images/background.png')",
+        'gray-to-sky': "linear-gradient(to bottom, #38bdf8 50% , #9ca3af 50%);",
+        'yellow-to-yellow': "linear-gradient(to bottom, #facc15 50% , #a16207 50%);",
+        'red-to-sky': "linear-gradient(to bottom, #0369a1 50% , #f87171 50%);",
+
       },
       animation: {
         'bounce-once': 'single-bounce 0.2s 1'

@@ -4,16 +4,15 @@ import { HiOutlineRefresh } from 'react-icons/hi';
 import { TbPokeball } from 'react-icons/tb';
 import PokemonCards from './PokemonCards';
 import { usePokemons } from '../../../services/pokemon';
-import type { Pokemon } from 'pokenode-ts';
+import usePokemonContext from '../../../contexts/hooks/usePokemonContext';
 
 const Pokemons: NextPage = () => {
   const [limit] = useState<number>(21);
-  const [offset, setOffset] = useState<number>(0);
-  const [loadedPokemons, setLoadedPokemons] = useState<Pokemon[]>([]);
+  const { pokemons, offset, changeOffset, handleAddPokemons, handleClearPokemons } = usePokemonContext();
   const { data, isLoading, mutate } = usePokemons({ offset, limit });
 
   const loadMorePokemon = () => {
-    setOffset(offset + limit);
+    changeOffset(offset + limit);
     mutate();
   };
 
@@ -21,14 +20,14 @@ const Pokemons: NextPage = () => {
     const max = data?.count ? data.count - limit : 0;
     const min = 0;
     const randomOffset = Math.floor(Math.random() * (max - min + 1)) + min;
-    setOffset(randomOffset);
-    setLoadedPokemons([]);
+    changeOffset(randomOffset);
+    handleClearPokemons();
     mutate();
   };
 
   useEffect(() => {
     if (data) {
-      setLoadedPokemons([...loadedPokemons, ...data.results]);
+      handleAddPokemons(data.results, offset);
     }
   }, [data]);
 
@@ -54,7 +53,7 @@ const Pokemons: NextPage = () => {
           </select>
         </div>
       </div>
-      <PokemonCards pokemons={loadedPokemons} numberOfLoaders={limit} loading={isLoading} />
+      <PokemonCards pokemons={pokemons} numberOfLoaders={limit} loading={isLoading} />
       <button
         className="px-4 py-2 mb-8 w-fit mx-auto bg-cyan-500 rounded-md text-white hover:bg-cyan-600"
         onClick={loadMorePokemon}

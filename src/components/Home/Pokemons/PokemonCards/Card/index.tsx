@@ -38,13 +38,13 @@ const PokemonCard: NextPage<Props> = (props: Props) => {
         color = 'bg-orange-500';
         break;
       case 'flying':
-        color = 'bg-gradient-to-t from-gray-400 to-sky-400';
+        color = 'bg-gray-to-sky';
         break;
       case 'poison':
         color = 'bg-violet-400';
         break;
       case 'ground':
-        color = 'bg-gradient-to-t from-yellow-800 to-yellow-400';
+        color = 'bg-yellow-to-yellow';
         break;
       case 'rock':
         color = 'bg-yellow-800';
@@ -77,7 +77,7 @@ const PokemonCard: NextPage<Props> = (props: Props) => {
         color = 'bg-sky-300';
         break;
       case 'dragon':
-        color = 'bg-gradient-to-t from-red-400 to-sky-700';
+        color = 'bg-red-to-sky';
         break;
       case 'dark':
         color = 'bg-zinc-700';
@@ -99,7 +99,7 @@ const PokemonCard: NextPage<Props> = (props: Props) => {
       <div className="flex-1 py-1">
         <img src={defaultImage} alt="pokemon" className="rounded-md bg-gray-200 bg-opacity-80" />
         <div className="flex-1 space-y-3 pl-3 pb-1">
-          <p className="text-sm text-slate-400">N.º {zeroesAdder(pokemon.id)}</p>
+          <p className="text-sm text-neutral-400">N.º {zeroesAdder(pokemon.id)}</p>
           <div className="space-y-2">
             <p className="text-[22px]">{capitalize(pokemon.name)}</p>
             <div className="grid grid-cols-3 gap-2">

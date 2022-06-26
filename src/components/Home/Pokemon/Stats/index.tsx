@@ -1,8 +1,6 @@
 import type { NextPage } from 'next';
 import type { Pokemon } from 'pokenode-ts';
-import { CgGenderMale, CgGenderFemale } from 'react-icons/cg';
-import capitalize from '../../../../utils/general/capitalize';
-import Stat from './Stat';
+import StatColumn from './StatColumn';
 
 interface Props {
   pokemon: Pokemon;
@@ -11,23 +9,13 @@ interface Props {
 const Stats: NextPage<Props> = (props: Props) => {
   const { pokemon } = props;
 
-  const genders = (
-    <div className="flex justify-start">
-      <CgGenderMale className="mr-4" size={30} />
-      <CgGenderFemale size={30} />
-    </div>
-  );
-
   return (
-    <div className="w-full grid grid-cols-2 py-4 px-6 rounded-lg bg-sky-500">
-      <div className="flex flex-col space-y-4">
-        <Stat statName="Altura" statValue={`${pokemon.height / 10} m`} />
-        <Stat statName="Peso" statValue={`${pokemon.weight} kg`} />
-        <Stat statName="Sexo" statValue={genders} />
-      </div>
-      <div className="flex flex-col space-y-4">
-        <Stat statName="Categoría" statValue={capitalize(pokemon.species.name)} />
-        <Stat statName="Habilidad" statValue={capitalize(pokemon.abilities[0].ability.name)} />
+    <div className="w-full h-[18rem] mt-6 bg-neutral-400 px-6 pt-2 pb-4 rounded-lg">
+      <h1 className="text-lg text-slate-700 mb-4">Puntos de base</h1>
+      <div className="grid grid-cols-6 gap-2">
+        {pokemon.stats.map(({ base_stat, stat: { name } }) => (
+          <StatColumn key={name} name={name} baseStat={base_stat} />
+        ))}
       </div>
     </div>
   );

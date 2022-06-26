@@ -2,9 +2,11 @@ import { useMemo } from 'react';
 import type { NextPage } from 'next';
 import type { Pokemon } from 'pokenode-ts';
 import colorTypes from '../../../utils/pokemonHelpers/types';
-import getTypeId from '../../../utils/general/getTypeId';
+import getIdFromUrl from '../../../utils/general/getIdFromUrl';
 import { useType } from '../../../services/type';
+import Characteristics from './Characteristics';
 import Stats from './Stats';
+import Specie from './Specie';
 
 interface Props {
   pokemon: Pokemon;
@@ -12,8 +14,8 @@ interface Props {
 
 const PokemonDetail: NextPage<Props> = (props: Props) => {
   const { pokemon } = props;
-  const { data: firstTypeData } = useType({ id: getTypeId(pokemon.types[0].type.url)! });
-  const { data: secondTypeData } = useType({ id: getTypeId(pokemon.types[1]?.type?.url) });
+  const { data: firstTypeData } = useType({ id: getIdFromUrl(pokemon.types[0].type.url)! });
+  const { data: secondTypeData } = useType({ id: getIdFromUrl(pokemon.types[1]?.type?.url) });
 
   const defaultImage = useMemo(() => {
     let image = pokemon.sprites.other['official-artwork'].front_default;
@@ -25,9 +27,9 @@ const PokemonDetail: NextPage<Props> = (props: Props) => {
 
   const filterWeaknesses = useMemo(() => {
     if (!firstTypeData) return [];
-    const firstWeaknesses = firstTypeData.damage_relations.double_damage_from.map(({ name }) => name);
+    const firstWeaknesses = firstTypeData?.damage_relations?.double_damage_from?.map(({ name }) => name) || [];
     if (!secondTypeData) return firstWeaknesses;
-    const secondWeaknesses = secondTypeData.damage_relations.double_damage_from.map(({ name }) => name);
+    const secondWeaknesses = secondTypeData?.damage_relations?.double_damage_from?.map(({ name }) => name) || [];
     return Array.from(new Set([...firstWeaknesses, ...secondWeaknesses]));
   }, [firstTypeData, secondTypeData]);
 
@@ -43,13 +45,13 @@ const PokemonDetail: NextPage<Props> = (props: Props) => {
         color = 'bg-orange-500';
         break;
       case 'flying':
-        color = 'bg-gradient-to-t from-gray-400 to-sky-400';
+        color = 'bg-gray-to-sky';
         break;
       case 'poison':
         color = 'bg-violet-400';
         break;
       case 'ground':
-        color = 'bg-gradient-to-t from-yellow-800 to-yellow-400';
+        color = 'bg-yellow-to-yellow';
         break;
       case 'rock':
         color = 'bg-yellow-800';
@@ -82,7 +84,7 @@ const PokemonDetail: NextPage<Props> = (props: Props) => {
         color = 'bg-sky-300';
         break;
       case 'dragon':
-        color = 'bg-gradient-to-t from-red-400 to-sky-700';
+        color = 'bg-red-to-sky';
         break;
       case 'dark':
         color = 'bg-zinc-700';
@@ -105,9 +107,11 @@ const PokemonDetail: NextPage<Props> = (props: Props) => {
         <div className="w-full h-[28rem] rounded-md bg-gray-200 bg-opacity-80">
           <img src={defaultImage} alt="pokemon" />
         </div>
+        <Stats pokemon={pokemon} />
       </div>
       <div>
-        <Stats pokemon={pokemon} />
+        <Specie pokemon={pokemon} />
+        <Characteristics pokemon={pokemon} />
         <h3 className="w-full mb-4 mt-8 text-xl font-light">Tipo</h3>
         <div className="grid grid-cols-3 gap-2">
           {pokemon.types.map(({ type: { name } }) => {
@@ -117,7 +121,7 @@ const PokemonDetail: NextPage<Props> = (props: Props) => {
         </div>
         <h3 className="w-full my-4 text-xl font-light">Debilidad</h3>
         <div className="grid grid-cols-3 gap-2">
-          {filterWeaknesses.map((name) => {
+          {filterWeaknesses?.map((name) => {
             const { translate, textColor } = colorTypes(name);
             return <button key={name} className={`w-32 px-2 py-1 rounded-md ${textColor} ${bgColor(name)}`}>{translate}</button>;
           })}
