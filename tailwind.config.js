@@ -27,7 +27,7 @@ module.exports = {
         '4xl': '2rem',
       },
       backgroundImage: {
-        'main-background': "url('../src/assets/images/background.png')",
+        'main-background': "url('https://res.cloudinary.com/cloudiegosm/image/upload/v1656271238/background_qganrr.png')",
         'gray-to-sky': "linear-gradient(to bottom, #38bdf8 50% , #9ca3af 50%)",
         'yellow-to-yellow': "linear-gradient(to bottom, #facc15 50% , #a16207 50%)",
         'red-to-sky': "linear-gradient(to bottom, #0369a1 50% , #f87171 50%)",
